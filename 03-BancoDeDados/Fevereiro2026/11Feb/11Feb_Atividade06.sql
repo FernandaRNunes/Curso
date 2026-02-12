@@ -138,7 +138,7 @@ select produtos.categoria,
 from itens_pedido
 join produtos on itens_pedido.id_produto = produtos.id_produto
 group by produtos.categoria
-order by valor_total_vendido
+order by valor_total_vendido desc
 ;
 
 --7 
@@ -151,26 +151,4 @@ JOIN itens_pedido ON pedidos.id_pedido = itens_pedido.id_pedido
 JOIN produtos ON itens_pedido.id_produto = produtos.id_produto
 GROUP BY clientes.nome
 ORDER BY total_gasto DESC;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
