@@ -47,8 +47,10 @@ execute function inserir_historico_precos;
 create or replace function inserir_historico_precos()
 returns trigger as $$
 begin
+	if (old.preco != new.preco) then
 	insert into historico_produtos(preco_antigo, preco_novo, id_produto)
 values (old.preco, new.preco, new.id);
+	end if;
 	return new;
 end
 $$ language plpgsql;
@@ -58,16 +60,83 @@ set preco = 89.90
 where id_produto =1;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 -- Automatizar quando produto é vendido descontar do estoque
+create or replace trigger trg_venda_produto
+after insert on vendas
+for each row 
+execute function diminuir_estoque();
+
+create or replace function diminuir_estoque().
+returns trigger as $$
+begin
+	select estoque from produtos
+	where id= new.produto_vendido; 
+
+	if (new.quantidade <= (select estoque from produtos
+	where id= new.produto_vendido)) then
+	update produtos
+	set estoque  = - new.quantidade
+	where id - new.produto_vendido;
+end if;
+return new;
+end
+$$ language plpgsql
+
+insert into vendas(quantidade, produto_vendido)
+values (3,1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
