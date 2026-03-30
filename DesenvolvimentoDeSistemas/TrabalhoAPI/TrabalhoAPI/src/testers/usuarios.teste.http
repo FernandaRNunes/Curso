@@ -1,0 +1,36 @@
+GET http://localhost:3000/usuarios
+
+###
+
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+	"usuario": "fernanda",
+	"ativo": true
+}
+
+###
+
+GET http://localhost:3000/usuarios/1
+
+###
+
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{
+	"usuario": "fernanda",
+	"ativo": false
+}
+
+###
+
+DELETE http://localhost:3000/usuarios/1
+
+###
+
+GET http://localhost:3000/usuarios
+
+###
+ 
