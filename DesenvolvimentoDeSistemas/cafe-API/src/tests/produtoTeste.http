@@ -1,0 +1,14 @@
+GET http://localhost:3000/api/produtos
+
+###
+
+POST http://localhost:3000/api/produtos
+content-Type: application/json
+
+{
+    "nome": "Café Cuado",
+    "preco": 2.50,
+    "estoque": 20
+}
+
+###
