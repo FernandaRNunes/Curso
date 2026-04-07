@@ -1,3 +1,9 @@
+//Listar todos
+GET http://localhost:3000/api/pedidos
+
+###
+
+//Criar pedido
 POST http://localhost:3000/api/pedidos
 Content-Type: application/json
 
@@ -17,3 +23,7 @@ Content-Type: application/json
         }
     ]
 } 
+
+###
+// Deletar
+DELETE http://localhost:3000/api/pedidos/7

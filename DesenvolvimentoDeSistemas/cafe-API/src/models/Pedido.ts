@@ -5,6 +5,7 @@ export interface IItemPedido {
   pedido_id: number;
   produto_id: number;
   quantidade: number;
+  nome: string;
   preco_un: number;
 }
 
@@ -16,6 +17,17 @@ export interface IPedido {
 }
 
 export type INovoItemPedido = Pick<IItemPedido, "produto_id" | "quantidade">;
+
+export interface IPedidoRow {
+  pedido_id: number;
+  data_criacao: Date;
+  status: string;
+  item_id: number | null;
+  produto_id: number | null;
+  quantidade: number | null;
+  produto_nome: string | null;
+  produto_preco: number | null;
+}
 
 export const PedidoModel = {
   async criar(itens: INovoItemPedido[]): Promise<{ id: number }> {
@@ -58,4 +70,66 @@ export const PedidoModel = {
       client.release();
     }
   },
+
+  async listarTodos(): Promise<IPedido[]> {
+    const query = `
+      SELECT p.id as pedido_id, p.data_criacao, p.status, ip.id as item_id, ip.produto_id, ip.quantidade, pr.nome as produto_nome, pr.preco as produto_preco
+      FROM pedidos p 
+      LEFT JOIN itens_pedido ip ON p.id = ip.pedido_id
+      LEFT JOIN produtos pr ON ip.produto_id = pr.id
+      ORDER BY p.data_criacao DESC
+    `;
+    const { rows } = await pool.query<IPedidoRow>(query);
+    const listaPedidos: IPedido[] = [];
+    for (const row of rows) {
+      let pedidoExistente = listaPedidos.find((p) => p.id === row.pedido_id);
+      if (!pedidoExistente) {
+        pedidoExistente = {
+          id: row.pedido_id,
+          data_criacao: row.data_criacao,
+          status: row.status,
+          itens: [],
+        };
+        listaPedidos.push(pedidoExistente);
+      }
+      if (row.item_id) {
+        pedidoExistente.itens.push({
+          id: row.item_id,
+          produto_id: row.produto_id!,
+          pedido_id: row.pedido_id!,
+          quantidade: row.quantidade!,
+          nome: row.produto_nome!,
+          preco_un: row.produto_preco!,
+        });
+      }
+    }
+    return listaPedidos;
+  },
+
+  async deletar(id: number): Promise<boolean> {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const queryItens =
+        "SELECT produto_id, quantidade FROM itens_pedido WHERE pedido_id = $1";
+      const { rows } = await client.query(queryItens, [id]);
+      for (const row of rows) {
+        await client.query(
+          "UPDATE produtos SET estoque = estoque + $1 WHERE id = $2",
+          [row.quantidade, row.produto_id]
+        );
+      }
+      const result = await client.query("DELETE FROM pedidos WHERE id = $1", [
+        id,
+      ]);
+      await client.query("COMMIT");
+      return (result.rowCount ?? 0) > 0;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
+  async mudarStatus() {},
 };
