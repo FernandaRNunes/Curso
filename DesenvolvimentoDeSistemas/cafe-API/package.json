@@ -20,5 +20,13 @@
     "@types/pg": "^8.20.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoahansen/cafe-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcoahansen/cafe-api/issues"
+  },
+  "homepage": "https://github.com/marcoahansen/cafe-api#readme"
 }

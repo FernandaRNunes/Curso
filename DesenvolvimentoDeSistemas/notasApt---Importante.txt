@@ -1,5 +1,20 @@
+--Criar um arquivo novo: 
+
+npm init -y
+
+npm install typescript tsx ||<(se for usar o Typespript)
+
+
+xxxxxxxxx
+-- Iniciar com npm install
+
+
+xxxxxxxxx
+--Rodar: 
 npm run dev
 
+
+xxxxxxxxx
 -- o ARQUIVO.ENV não existe. Criar ele em: 
 Na pasta principal > 
 .env
@@ -7,3 +22,4 @@ Na pasta principal >
 PORT=3000
 DATABASE_URL=postgres://postgres:aluno@localhost:5432/cafe
 
+xxxxxxxxx

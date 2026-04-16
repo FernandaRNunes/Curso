@@ -131,5 +131,59 @@ export const PedidoModel = {
       client.release();
     }
   },
-  async mudarStatus() {},
+
+  async atualizar(id: number, novosItens: INovoItemPedido[]): Promise<boolean> {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const { rows: intensAntigos } = await client.query(
+        "SELECT produto_id, quantidade FROM intes_pedido WHERE pedido_id = $1",
+        [id]
+      );
+      if (intensAntigos.length === 0) {
+        throw new Error("Pedido não encontrando ou sem itens.");
+      }
+      for (const item of intensAntigos) {
+        await client.query(
+          "UPDATE produtos SET estoque = estoque + $1 WHERE id = $2",
+          [item.quantidade, item.produto_id]
+        );
+      }
+      await client.query("DELETE itens_pedido where pedido_id = $1", [id]);
+      for (const item of novosItens) {
+        const { rows: produto } = await client.query(
+          "SELECT estoque, nome, preco, FROM produtos WHERE id = $1"
+        );
+      }
+      for (const item of novosItens) {
+        const { rows: produto } = await client.query("SELECT estoque ");
+      }
+
+      await client.query("COMMIT");
+
+      return true;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
+
+  async mudarStatus(id: number, novoStatus: string): Promise<boolean> {
+    const query = "UPDATE pedidos SET status = $1 WHERE id = $2";
+    const result = await pool.query(query, [novoStatus, id]);
+    return (result.rowCount ?? 0) > 0;
+  },
+
+  async getFaturamentoTotal(): Promise<number> {
+    const query = `SELECT SUM(ip.quantidade * ip.preco_un) AS faturamento_total
+    FROM pedidos p 
+    INNER JOIN itens_pedido ip ON p.id = ip.pedido_id
+    WHERE p.status = 'finalizado'
+    `;
+    const result = await pool.query(query);
+
+    return result.rows[0].faturamento_total || 0;
+  },
 };
