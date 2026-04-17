@@ -1,7 +1,9 @@
+//Listar
 GET http://localhost:3000/api/users
 
 ###
 
+//Criar
 POST http://localhost:3000/api/users
 Content-Type:  application/json
  
@@ -10,17 +12,33 @@ Content-Type:  application/json
     "lastName": "Hansen"
  }
 
+//Deletar
 ###
 
 DELETE http://localhost:3000/api/users/1
 
 ###
 
-
+//Atualizar usuários
 PATCH  http://localhost:3000/api/users/3
 Content-Type:  application/json
  
  {
-    "firstName": "Fulaninho",
+    "firstName": "Fulaninhos",
     "lastName": "Hansen"
  }
+
+###
+
+GET http://localhost:3000/api/users/3
+
+###
+
+PATCH http://localhost:3000/api/users/3/toggle
+
+###
+//Listar Ativos
+GET http://localhost:3000/api/users/active
+
+###
+//

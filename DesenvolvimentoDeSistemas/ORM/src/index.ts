@@ -2,11 +2,13 @@ import express, { type Application } from "express";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import { userRoutes } from "./routes/userRoutes";
+import { postRoutes } from "./routes/postRoutes";
 
 const app = express();
 app.use(userRoutes);
 app.use(express.json());
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 AppDataSource.initialize()
   .then(() => {
