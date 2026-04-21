@@ -1,0 +1,19 @@
+{
+  "name": "trabalhoapi-cafe",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^6.0.3"
+  }
+}

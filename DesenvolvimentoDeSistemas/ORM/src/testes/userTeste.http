@@ -19,8 +19,8 @@ DELETE http://localhost:3000/api/users/1
 
 ###
 
-//Atualizar usuários
-PATCH  http://localhost:3000/api/users/3
+//UPDATE - Atualizar usuários
+PATCH  http://localhost:3000/api/users/999
 Content-Type:  application/json
  
  {
@@ -29,8 +29,8 @@ Content-Type:  application/json
  }
 
 ###
-
-GET http://localhost:3000/api/users/3
+//List By ID
+GET http://localhost:3000/api/users/10
 
 ###
 

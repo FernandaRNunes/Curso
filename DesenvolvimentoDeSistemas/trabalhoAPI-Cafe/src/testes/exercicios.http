@@ -1,0 +1,15 @@
+### Relatório financeiro
+GET http://localhost:3000/api/pedidos/relatorio
+
+### Cancelar pedido existente (ajuste o ID)
+PATCH http://localhost:3000/api/pedidos/1/cancelar
+
+###
+
+### Cancelar pedido que não existe (esperado: 404)
+PATCH http://localhost:3000/api/pedidos/9999/cancelar
+
+###
+
+### Cancelar pedido já finalizado (esperado: 400)
+PATCH http://localhost:3000/api/pedidos/2/cancelar
