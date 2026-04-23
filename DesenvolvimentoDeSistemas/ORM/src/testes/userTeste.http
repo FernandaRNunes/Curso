@@ -8,14 +8,13 @@ POST http://localhost:3000/api/users
 Content-Type:  application/json
  
  {
-    "firstName": "Marco",
-    "lastName": "Hansen"
+   
  }
 
 //Deletar
 ###
 
-DELETE http://localhost:3000/api/users/1
+DELETE http://localhost:3000/api/users/999
 
 ###
 
