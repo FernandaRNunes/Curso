@@ -1,13 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "./Post";
-import {
-  IS_NOT_EMPTY,
-  isEmpty,
-  IsNotEmpty,
-  isNotEmpty,
-  IsString,
-  isString,
-} from "class-validator";
+import { IsNotEmpty, IsString, IsEmail } from "class-validator";
 
 @Entity()
 export class User {
@@ -23,6 +16,10 @@ export class User {
   @IsNotEmpty({ message: "O primeiro nome é obrigatório" })
   @IsString({ message: "O nome deve ser um texto" })
   lastName!: string;
+
+  @Column("varchar", { unique: true })
+  @IsEmail({}, { message: "O e-mail fornecido não é válido" })
+  email!: string;
 
   @Column({ type: "boolean", default: true })
   isActive!: boolean;

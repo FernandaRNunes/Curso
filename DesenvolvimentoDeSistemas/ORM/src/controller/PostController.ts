@@ -73,4 +73,25 @@ export class PostController {
       next(error);
     }
   };
+
+  delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = Number(req.params.id);
+
+      if (isNaN(id)) {
+        throw new BadRequestError("Id do post inválido");
+      }
+
+      const post = await this.postRepository.findOneBy({ id });
+      if (!post) {
+        throw new NotFoundError("Post não encontrado.");
+      }
+
+      await this.postRepository.remove(post);
+
+      return res.status(204).send();
+    } catch (error: unknown) {
+      next(error);
+    }
+  };
 }
