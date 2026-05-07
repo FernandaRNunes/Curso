@@ -1,0 +1,11 @@
+ORM 
+Object-Relational Maping ( Mapeamento Objeto- relacional) 
+
+
+------------------------------------
+Pode consultar a documentação do Prisma: 
+https://www.prisma.io/docs/prisma-orm/quickstart/postgresql
+
+------------------------------------
+
+ 

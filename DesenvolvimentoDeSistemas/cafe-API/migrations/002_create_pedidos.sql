@@ -1,5 +1,0 @@
-CREATE TABLE pedidos (
-    id SERIAL PRIMARY KEY,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) DEFAULT 'pendente'
-)

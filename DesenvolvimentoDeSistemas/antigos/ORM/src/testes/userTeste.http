@@ -1,0 +1,84 @@
+//Listar
+GET http://localhost:3000/api/users
+
+###
+
+//Criar
+POST http://localhost:3000/api/users
+Content-Type:  application/json
+ 
+ {
+    "firstName": "Flamenguista",
+    "lastName": "Hansen",
+    "email": "s2@m.com",
+    "phone": "24 992224848"
+ }
+
+//Deletar
+###
+
+DELETE http://localhost:3000/api/users/999
+
+###
+
+//UPDATE - Atualizar usuários
+PATCH  http://localhost:3000/api/users/999
+Content-Type:  application/json
+ 
+ {
+    "firstName": "Fulaninhos",
+    "lastName": "Hansen"
+ }
+
+###
+//List By ID
+GET http://localhost:3000/api/users/10
+
+###
+
+PATCH http://localhost:3000/api/users/3/toggle
+
+###
+//Listar Ativos
+GET http://localhost:3000/api/users/active
+
+###
+//
+
+GET http://localhost:3000/api/users
+
+###
+GET http://localhost:3000/api/users/active
+
+###
+GET http://localhost:3000/api/users/3
+
+###
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Marco Aurelio",
+  "lastName": "Hansen",
+  "phone": "2498888-9999",
+  "email": "smaa@m.com"
+  
+}
+
+###
+
+DELETE http://localhost:3000/api/users/2
+
+###
+
+PATCH  http://localhost:3000/api/users/3
+Content-Type: application/json
+
+{
+  "firstName": "Marco Aurelio",
+  "lastName": "Hansen"
+}
+
+###
+PATCH  http://localhost:3000/api/users/4/toggle

@@ -1,4 +1,4 @@
---Criar um arquivo novo: ↓
+--Criar um arquivo novo: 
 
 npm init -y
 

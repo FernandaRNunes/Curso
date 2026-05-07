@@ -1,0 +1,28 @@
+//Create ↓
+POST http://localhost:3000/api/posts
+Content-Type:  application/json
+ 
+ {
+    "title": " Vamoslá ",
+    "content": "Conteúdo do Post",
+    "userId": 11
+ }
+
+###
+//listar ↓
+GET http://localhost:3000/api/posts
+
+###
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "  teste      ",
+  "content": "     teste     ",
+  "userId": 1
+}
+
+###
+
+GET http://localhost:3000/api/posts
