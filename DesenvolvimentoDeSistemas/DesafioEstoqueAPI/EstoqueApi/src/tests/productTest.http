@@ -1,0 +1,14 @@
+//Criar Itens
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+    "name": "Teclado Mecânico para destros das duas mões",
+    "quantity": 10,
+    "price": 55.99
+}
+
+###
+
+//Listar todos
+GET http://localhost:3000/api/products

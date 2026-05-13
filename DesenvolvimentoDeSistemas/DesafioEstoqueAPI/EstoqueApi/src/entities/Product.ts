@@ -5,10 +5,10 @@ export class Product {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column("varchar")
   name!: string;
 
-  @Column()
+  @Column("int")
   quantity!: number;
 
   @Column("decimal", {

@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { DataSource, type DataSourceOptions } from "typeorm";
+import { Product } from "./entities/Product.js";
 
 const options: DataSourceOptions = {
   type: (process.env.DB_TYPE as "postgres") || "postgres",
@@ -10,7 +11,7 @@ const options: DataSourceOptions = {
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [],
+  entities: [Product],
   migrations: [],
   subscribers: [],
 };
