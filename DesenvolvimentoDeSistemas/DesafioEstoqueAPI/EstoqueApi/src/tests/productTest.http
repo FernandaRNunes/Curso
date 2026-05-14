@@ -3,12 +3,26 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-    "name": "Teclado Mecânico para destros das duas mões",
-    "quantity": 10,
-    "price": 55.99
+    "name": "Último procuto ",
+    "quantity": 2,
+    "price": 59.99
 }
 
 ###
 
 //Listar todos
 GET http://localhost:3000/api/products
+
+###
+//Update
+PATCH  http://localhost:3000/api/products/9
+Content-Type: application/json
+
+{
+     "name": "Último produto "
+    
+}
+
+###
+//Delete
+DELETE http://localhost:3000/api/products/8

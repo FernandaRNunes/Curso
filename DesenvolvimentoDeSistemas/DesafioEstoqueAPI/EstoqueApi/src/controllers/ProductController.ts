@@ -14,4 +14,19 @@ export class ProductController {
     const product = await this.productService.listAll();
     return res.status(200).json(product);
   };
+
+  upadate = async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const product = await this.productService.update(id, req.body);
+    return res.status(200).json(product);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    if (isNaN(id)) {
+      throw new Error("ID inválido");
+    }
+    await this.productService.delete(id);
+    return res.status(204).send();
+  };
 }
